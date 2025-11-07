@@ -19,10 +19,9 @@
         $stmt = $conn->prepare("SELECT profile_pic FROM user WHERE email = ? LIMIT 1");
         $stmt->bind_param("s", $email);
         $stmt->execute();
-        $stmt->bind_result($pic);
         $stmt->fetch();
         $stmt->close();
-        return $pic;
+
     }
 
     // ✅ Process Profile Picture Upload
