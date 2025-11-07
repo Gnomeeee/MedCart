@@ -1,0 +1,64 @@
+<?php
+session_start();
+include "includes/functions.php";
+
+// Admin check
+if (isset($_SESSION['admin_id'])) {
+    $check_admin = check_admin($_SESSION['admin_id']);
+    if ($check_admin == 0) {
+        header("Location: logout.php");
+        exit();
+    }
+}
+
+// Staff check
+elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'staff') {
+    // Staff is allowed, no redirect
+}
+
+// Rider check
+elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'rider') {
+    // Rider is allowed, no redirect
+}
+
+// No valid session, redirect to login
+else {
+    header("Location: ../login.php");
+    exit();
+}
+?>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        MedCart
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MedCart is a pharmacy management system that allows users to manage their pharmacy inventory, sales, and customer information.">
+    <link rel="icon" href="../images/logo.png" type="image/icon type">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
+    <!-- Bootstrap core CSS -->
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
